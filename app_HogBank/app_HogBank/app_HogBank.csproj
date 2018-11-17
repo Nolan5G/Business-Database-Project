@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -69,6 +70,9 @@
     <Compile Include="Forms\HomescreenSignupForm.Designer.cs">
       <DependentUpon>HomescreenSignupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Arguments\FormErrorArg.cs" />
+    <Compile Include="Models\Arguments\FormInfoArg.cs" />
+    <Compile Include="Models\LoginVO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\SignupResponseForm.cs">
@@ -77,6 +81,8 @@
     <Compile Include="Forms\SignupResponseForm.Designer.cs">
       <DependentUpon>SignupResponseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\ConnectionStringService.cs" />
+    <Compile Include="Services\DatabaseService.cs" />
     <EmbeddedResource Include="Forms\AccountHistory.resx">
       <DependentUpon>AccountHistory.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +116,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\Configurations\DatabaseConnection.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -132,5 +141,6 @@
     <Content Include="Resources\Images\trend-sales-icon.png" />
     <Content Include="Resources\Images\withdraw.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

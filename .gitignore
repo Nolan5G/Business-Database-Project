@@ -207,3 +207,12 @@ project.lock.json
 *.feature.cs
 *.feature.xlsx.*
 *.Specs_*.html
+app_HogBank/.vs/app_HogBank/v15/.suo
+app_HogBank/.vs/app_HogBank/v15/.suo
+*.ide
+*.ide-shm
+*.ide-wal
+*.exe
+app_HogBank/app_HogBank/bin/Debug/app_HogBank.exe.config
+*.pdb
+*.cache

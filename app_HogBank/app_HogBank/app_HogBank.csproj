@@ -46,56 +46,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\AccountHistory.cs">
+    <Compile Include="Forms\AccountManagement\AccountHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AccountHistory.Designer.cs">
+    <Compile Include="Forms\AccountManagement\AccountHistory.Designer.cs">
       <DependentUpon>AccountHistory.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Homescreen.cs">
+    <Compile Include="Forms\MainScreen\Homescreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Homescreen.Designer.cs">
+    <Compile Include="Forms\MainScreen\Homescreen.Designer.cs">
       <DependentUpon>Homescreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\HomeScreenLoginForm.cs">
+    <Compile Include="Forms\Login\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\HomeScreenLoginForm.Designer.cs">
-      <DependentUpon>HomeScreenLoginForm.cs</DependentUpon>
+    <Compile Include="Forms\Login\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\HomescreenSignupForm.cs">
+    <Compile Include="Forms\Login\SignupForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\HomescreenSignupForm.Designer.cs">
-      <DependentUpon>HomescreenSignupForm.cs</DependentUpon>
+    <Compile Include="Forms\Login\SignupForm.Designer.cs">
+      <DependentUpon>SignupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\WindowManager.cs" />
     <Compile Include="Models\Arguments\FormErrorArg.cs" />
     <Compile Include="Models\Arguments\FormInfoArg.cs" />
     <Compile Include="Models\LoginVO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Forms\SignupResponseForm.cs">
+    <Compile Include="Forms\Login\SignupResponseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SignupResponseForm.Designer.cs">
+    <Compile Include="Forms\Login\SignupResponseForm.Designer.cs">
       <DependentUpon>SignupResponseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\ConnectionStringService.cs" />
     <Compile Include="Services\DatabaseService.cs" />
-    <EmbeddedResource Include="Forms\AccountHistory.resx">
+    <EmbeddedResource Include="Forms\AccountManagement\AccountHistory.resx">
       <DependentUpon>AccountHistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Homescreen.resx">
+    <EmbeddedResource Include="Forms\MainScreen\Homescreen.resx">
       <DependentUpon>Homescreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\HomeScreenLoginForm.resx">
-      <DependentUpon>HomeScreenLoginForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Login\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\HomescreenSignupForm.resx">
-      <DependentUpon>HomescreenSignupForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Login\SignupForm.resx">
+      <DependentUpon>SignupForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SignupResponseForm.resx">
+    <EmbeddedResource Include="Forms\Login\SignupResponseForm.resx">
       <DependentUpon>SignupResponseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

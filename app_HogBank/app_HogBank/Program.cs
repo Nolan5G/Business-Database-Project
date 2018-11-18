@@ -1,4 +1,5 @@
-﻿using System;
+﻿using app_HogBank.Forms.Login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace app_HogBank
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Forms.HomeScreenLoginForm());
+            Application.Run(new LoginForm());
         }
     }
 }

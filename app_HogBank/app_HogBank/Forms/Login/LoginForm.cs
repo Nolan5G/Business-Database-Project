@@ -12,15 +12,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace app_HogBank.Forms
+namespace app_HogBank.Forms.Login
 {
-    public partial class HomeScreenLoginForm : Form
+    public partial class LoginForm : Form
     {
         private DatabaseService databaseService;
 
-        public HomeScreenLoginForm()
+        public LoginForm()
         {
-            databaseService = new DatabaseService();
+            databaseService = new DatabaseService(this.formError, this.formInfo);
 
             InitializeComponent();
  
@@ -30,17 +30,12 @@ namespace app_HogBank.Forms
         //=====================================================================
         // General Form Management
         //=====================================================================
-        // Constants and Variables
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HTCAPTION = 0x2;
-        [DllImport("User32.dll")]
-        public static extern bool ReleaseCapture();
-        [DllImport("User32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-
-        // Functions
-        private void HomeScreenLoginForm_Load(object sender, EventArgs e)
+        private void LoginForm_Load(object sender, EventArgs e)
         {
+            // The login form is the main instance, so we tag it to reference the main tag.
+            this.Tag = this;
+
+            // Header Draggable Subscription
             this.panelHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseDown);
             foreach (Control control in this.panelHeader.Controls)
             {
@@ -50,42 +45,33 @@ namespace app_HogBank.Forms
                 }
             }
 
+            // Custom Exit Button Subscription
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             this.buttonMaximize.Click += new System.EventHandler(this.buttonMaximize_Click);
             this.buttonMinimize.Click += new System.EventHandler(this.buttonMinimize_Click);
-
-            this.databaseService.OnFormError += this.formError;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            this.databaseService.OnFormError -= this.formError;
+            this.databaseService.cleanup();
             this.Close();
         }
 
-        private void buttonMaximize_Click(object sender, EventArgs e)
-        {
-            if(this.WindowState != FormWindowState.Maximized)
-                this.WindowState = FormWindowState.Maximized;
-            else
-                this.WindowState = FormWindowState.Normal;
-        }
+        private void buttonMaximize_Click(object sender, EventArgs e) { WindowManager.handleWindowMaximization(this); }
 
-        private void buttonMinimize_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Minimized;
-        }
+        private void buttonMinimize_Click(object sender, EventArgs e) { WindowManager.handleWindowMinimization(this); }
 
-        private void mouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
-            }
-        }
+        private void mouseDown(object sender, MouseEventArgs e) { WindowManager.fireMouseDownEvent(Handle, e); }
 
+        //=====================================================================
+        //  Custom Event Handlers
+        //=====================================================================
         private void formError(object sender, FormErrorArg arg)
+        {
+            MessageBox.Show(arg.message);
+        }
+
+        private void formInfo(object sender, FormInfoArg arg)
         {
             MessageBox.Show(arg.message);
         }
@@ -109,10 +95,9 @@ namespace app_HogBank.Forms
                 }
                 if (matchingLoginInfo.Count == 1)
                 {
-                    Homescreen form = new Homescreen();
-                    form.Tag = this;
-                    form.Show(this);
-                    this.Hide();
+                    // Before exiting, unsubscribe.
+                    this.databaseService.OnFormError -= this.formError;
+                    WindowManager.navigateToForm(this, this.GetType(), typeof(Homescreen));
                 }
                 
             }
@@ -120,7 +105,7 @@ namespace app_HogBank.Forms
 
         private void label5_Click(object sender, EventArgs e)
         {
-            HomescreenSignupForm form = new HomescreenSignupForm();
+            SignupForm form = new SignupForm();
             form.Tag = this;
             form.Show(this);
             this.Hide();

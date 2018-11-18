@@ -1,4 +1,4 @@
-﻿namespace app_HogBank.Forms
+﻿namespace app_HogBank.Forms.AccountManagement
 {
     partial class AccountHistory
     {

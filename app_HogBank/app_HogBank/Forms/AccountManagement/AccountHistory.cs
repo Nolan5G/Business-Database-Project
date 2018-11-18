@@ -9,19 +9,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace app_HogBank.Forms
+namespace app_HogBank.Forms.AccountManagement
 {
-    public partial class HomescreenSignupForm : Form
+    public partial class AccountHistory : Form
     {
-        public HomescreenSignupForm()
+        public AccountHistory()
         {
             InitializeComponent();
         }
 
         //=====================================================================
-        // General Form Management
+        // Window Management Snippets
         //=====================================================================
-        // Constants and Variables
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HTCAPTION = 0x2;
         [DllImport("User32.dll")]
@@ -29,8 +28,7 @@ namespace app_HogBank.Forms
         [DllImport("User32.dll")]
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
-        // Functions
-        private void HomescreenSignupForm_Load(object sender, EventArgs e)
+        private void AccountHistory_Load(object sender, EventArgs e)
         {
             this.panelHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseDown);
             foreach (Control control in this.panelHeader.Controls)
@@ -48,7 +46,7 @@ namespace app_HogBank.Forms
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            var form = (HomeScreenLoginForm)Tag;
+            var form = (Homescreen)Tag;
             form.Show();
             this.Close();
         }
@@ -73,17 +71,6 @@ namespace app_HogBank.Forms
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
-        }
-
-        //=====================================================================
-        // Form Custom Functionality
-        //=====================================================================
-        private void buttonLogin_Click(object sender, EventArgs e)
-        {
-            SignupResponseForm form = new SignupResponseForm();
-            form.Tag = this.Tag;
-            form.Show(this);
-            this.Hide();
         }
     }
 }

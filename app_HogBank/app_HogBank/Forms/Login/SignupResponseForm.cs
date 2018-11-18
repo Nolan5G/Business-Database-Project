@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace app_HogBank.Forms
+namespace app_HogBank.Forms.Login
 {
     public partial class SignupResponseForm : Form
     {
@@ -48,7 +48,7 @@ namespace app_HogBank.Forms
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            var form = (HomeScreenLoginForm)Tag;
+            var form = (LoginForm)Tag;
             form.Show();
             this.Close();
         }

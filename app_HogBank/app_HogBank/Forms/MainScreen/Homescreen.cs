@@ -1,4 +1,6 @@
-﻿using System;
+﻿using app_HogBank.Forms.AccountManagement;
+using app_HogBank.Forms.Login;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,7 +52,7 @@ namespace app_HogBank.Forms
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            var form = (HomeScreenLoginForm)Tag;
+            var form = (LoginForm)Tag;
             form.Show();
             this.Close();
         }

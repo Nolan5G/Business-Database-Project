@@ -20,26 +20,55 @@ namespace app_HogBank.Services
         private OleDbConnection connection;
         private ConnectionStringService connectionStringService;
 
+        //------------------------------------------------------------------------
+        //  Constructors and Initializers
+        //------------------------------------------------------------------------
+        public DatabaseService(FormErrorHandler error, FormInfoHandler info)
+        {
+            connection = new OleDbConnection();
+            connectionStringService = new ConnectionStringService();
+            connection.ConnectionString = connectionStringService.buildConnectionString();
+            connection.Open();
+
+            OnFormError += error;
+            OnFormInfo += info;
+        }
+
+        public void cleanup()
+        {
+            removeSubscription();
+            connection.Close();
+        }
+
+        //------------------------------------------------------------------------
+        //  Event Handlers and Events
+        //------------------------------------------------------------------------
         public delegate void FormErrorHandler(object sender, FormErrorArg args);
         public event FormErrorHandler OnFormError;
 
         public delegate void FormInfoHandler(object sender, FormInfoArg args);
         public event FormInfoHandler OnFormInfo;
 
-        //------------------------------------------------------------------------
-        //  Constructors and Initializers
-        //------------------------------------------------------------------------
-        public DatabaseService()
+        public void removeSubscription()
         {
-            connection = new OleDbConnection();
-            connectionStringService = new ConnectionStringService();
-            connection.ConnectionString = connectionStringService.buildConnectionString();
-            connection.Open();
-        }
+            FormErrorHandler handlerError = OnFormError;
 
-        public void cleanup()
-        {
-            connection.Close();
+            if(handlerError != null)
+            {
+                foreach (Delegate d in handlerError.GetInvocationList())
+                {
+                    handlerError -= (FormErrorHandler)d;
+                }
+            }
+
+            FormInfoHandler handlerInfo = OnFormInfo;
+            if(handlerInfo != null)
+            {
+                foreach (Delegate d in handlerInfo.GetInvocationList())
+                {
+                    handlerInfo -= (FormInfoHandler)d;
+                }
+            }
         }
 
         //=======================================================

@@ -95,9 +95,12 @@ namespace app_HogBank.Forms.Login
                 }
                 if (matchingLoginInfo.Count == 1)
                 {
+                    LoginVO currentLogin = matchingLoginInfo[0];
+                    CustomerVO customerInfo = databaseService.GetCustomerInformationFromRegistrationId(currentLogin.Id);
+
                     // Before exiting, unsubscribe.
                     this.databaseService.OnFormError -= this.formError;
-                    WindowManager.navigateToForm(this, this.GetType(), typeof(Homescreen));
+                    WindowManager.navigateToFormStartTag(this, this.GetType(), typeof(Homescreen), customerInfo);
                 }
                 
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using app_HogBank.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -69,6 +70,34 @@ namespace app_HogBank.Forms
 
             destForm.Show(srcForm);
             srcForm.Hide();
+        }
+
+        public static void navigateToFormStartTag(Form src, Type srcType, Type destType, Object valueObject)
+        {
+            dynamic srcForm = Convert.ChangeType(src, srcType);
+            dynamic destForm = Convert.ChangeType(Activator.CreateInstance(destType), destType);
+
+            // Transfer main login instance information
+            destForm.Tag = valueObject;
+
+            destForm.Show(srcForm);
+            srcForm.Hide();
+        }
+
+        public static Type getTagType(Object tag)
+        {
+            if(tag is CustomerVO)
+            {
+                return typeof(CustomerVO);
+            }
+            else if(tag is EmployeeVO)
+            {
+                return typeof(EmployeeVO);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

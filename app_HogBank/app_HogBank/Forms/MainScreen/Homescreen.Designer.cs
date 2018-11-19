@@ -36,16 +36,20 @@
             this.buttonExit = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.buttonToggle = new System.Windows.Forms.Button();
             this.buttonToggle2 = new System.Windows.Forms.Button();
             this.flowPanelB = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonToggle = new System.Windows.Forms.Button();
             this.flowPanelA = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelPersonalized = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonExit)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -130,19 +134,6 @@
             this.panel1.Size = new System.Drawing.Size(288, 670);
             this.panel1.TabIndex = 3;
             // 
-            // buttonToggle
-            // 
-            this.buttonToggle.BackColor = System.Drawing.Color.Red;
-            this.buttonToggle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonToggle.ForeColor = System.Drawing.Color.White;
-            this.buttonToggle.Location = new System.Drawing.Point(4, 4);
-            this.buttonToggle.Name = "buttonToggle";
-            this.buttonToggle.Size = new System.Drawing.Size(281, 36);
-            this.buttonToggle.TabIndex = 3;
-            this.buttonToggle.Text = "Customer Services";
-            this.buttonToggle.UseVisualStyleBackColor = false;
-            this.buttonToggle.Click += new System.EventHandler(this.buttonToggle_Click);
-            // 
             // buttonToggle2
             // 
             this.buttonToggle2.BackColor = System.Drawing.Color.Red;
@@ -154,7 +145,6 @@
             this.buttonToggle2.TabIndex = 5;
             this.buttonToggle2.Text = "Employee Management System";
             this.buttonToggle2.UseVisualStyleBackColor = false;
-            this.buttonToggle2.Click += new System.EventHandler(this.buttonToggle2_Click);
             // 
             // flowPanelB
             // 
@@ -165,6 +155,18 @@
             this.flowPanelB.TabIndex = 4;
             this.flowPanelB.Tag = "Collapsed";
             // 
+            // buttonToggle
+            // 
+            this.buttonToggle.BackColor = System.Drawing.Color.Red;
+            this.buttonToggle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonToggle.ForeColor = System.Drawing.Color.White;
+            this.buttonToggle.Location = new System.Drawing.Point(4, 4);
+            this.buttonToggle.Name = "buttonToggle";
+            this.buttonToggle.Size = new System.Drawing.Size(281, 36);
+            this.buttonToggle.TabIndex = 3;
+            this.buttonToggle.Text = "Customer Services";
+            this.buttonToggle.UseVisualStyleBackColor = false;
+            // 
             // flowPanelA
             // 
             this.flowPanelA.BackColor = System.Drawing.SystemColors.Control;
@@ -174,11 +176,47 @@
             this.flowPanelA.TabIndex = 2;
             this.flowPanelA.Tag = "Collapsed";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(497, 253);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(532, 341);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // labelPersonalized
+            // 
+            this.labelPersonalized.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.labelPersonalized.Font = new System.Drawing.Font("Segoe UI Black", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPersonalized.Location = new System.Drawing.Point(367, 170);
+            this.labelPersonalized.Name = "labelPersonalized";
+            this.labelPersonalized.Size = new System.Drawing.Size(800, 59);
+            this.labelPersonalized.TabIndex = 5;
+            this.labelPersonalized.Text = "Home";
+            this.labelPersonalized.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI Black", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(559, 625);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(445, 59);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "For Quality Banking";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Homescreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 800);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelPersonalized);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -192,7 +230,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonExit)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -209,5 +249,8 @@
         private System.Windows.Forms.Button buttonToggle2;
         private System.Windows.Forms.FlowLayoutPanel flowPanelB;
         private System.Windows.Forms.FlowLayoutPanel flowPanelA;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label labelPersonalized;
+        private System.Windows.Forms.Label label2;
     }
 }

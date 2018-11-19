@@ -1,6 +1,6 @@
 ﻿namespace app_HogBank.Forms.AccountManagement
 {
-    partial class AccountHistory
+    partial class AccountTransaction
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountHistory));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountTransaction));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.buttonMinimize = new System.Windows.Forms.PictureBox();
             this.buttonMaximize = new System.Windows.Forms.PictureBox();
@@ -172,7 +172,7 @@
             this.flowPanelA.TabIndex = 2;
             this.flowPanelA.Tag = "Collapsed";
             // 
-            // AccountHistory
+            // AccountTransaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -180,9 +180,9 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "AccountHistory";
-            this.Text = "AccountHistory";
-            this.Load += new System.EventHandler(this.AccountHistory_Load);
+            this.Name = "AccountTransaction";
+            this.Text = "AccountTransaction";
+            this.Load += new System.EventHandler(this.AccountTransaction_Load);
             this.panelHeader.ResumeLayout(false);
             this.panelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonMinimize)).EndInit();

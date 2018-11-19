@@ -46,11 +46,53 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AccountManagement\AccountCreate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AccountManagement\AccountCreate.Designer.cs">
+      <DependentUpon>AccountCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AccountManagement\AccountHistory.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AccountManagement\AccountHistory.Designer.cs">
       <DependentUpon>AccountHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AccountManagement\AccountTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AccountManagement\AccountTransaction.Designer.cs">
+      <DependentUpon>AccountTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AccountManagement\TransactionApproval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AccountManagement\TransactionApproval.Designer.cs">
+      <DependentUpon>TransactionApproval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoanManagement\LoanApplication.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoanManagement\LoanApplication.Designer.cs">
+      <DependentUpon>LoanApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoanManagement\LoanApplicationTransaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoanManagement\LoanApplicationTransaction.Designer.cs">
+      <DependentUpon>LoanApplicationTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoanManagement\LoanHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoanManagement\LoanHistory.Designer.cs">
+      <DependentUpon>LoanHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoanManagement\LoanTransactionApproval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\LoanManagement\LoanTransactionApproval.Designer.cs">
+      <DependentUpon>LoanTransactionApproval.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainScreen\Homescreen.cs">
       <SubType>Form</SubType>
@@ -70,9 +112,30 @@
     <Compile Include="Forms\Login\SignupForm.Designer.cs">
       <DependentUpon>SignupForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ManagerScreens\EmployeeManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ManagerScreens\EmployeeManagement.Designer.cs">
+      <DependentUpon>EmployeeManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ManagerScreens\ProfitAndLossReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ManagerScreens\ProfitAndLossReport.Designer.cs">
+      <DependentUpon>ProfitAndLossReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ManagerScreens\SalesTrendReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ManagerScreens\SalesTrendReport.Designer.cs">
+      <DependentUpon>SalesTrendReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SidebarManager.cs" />
     <Compile Include="Forms\WindowManager.cs" />
     <Compile Include="Models\Arguments\FormErrorArg.cs" />
     <Compile Include="Models\Arguments\FormInfoArg.cs" />
+    <Compile Include="Models\CustomerVO.cs" />
+    <Compile Include="Models\EmployeeVO.cs" />
     <Compile Include="Models\LoginVO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,10 +145,17 @@
     <Compile Include="Forms\Login\SignupResponseForm.Designer.cs">
       <DependentUpon>SignupResponseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Resources\GlobalVariables.cs" />
     <Compile Include="Services\ConnectionStringService.cs" />
     <Compile Include="Services\DatabaseService.cs" />
+    <EmbeddedResource Include="Forms\AccountManagement\AccountCreate.resx">
+      <DependentUpon>AccountCreate.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AccountManagement\AccountHistory.resx">
       <DependentUpon>AccountHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AccountManagement\AccountTransaction.resx">
+      <DependentUpon>AccountTransaction.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainScreen\Homescreen.resx">
       <DependentUpon>Homescreen.cs</DependentUpon>
@@ -142,6 +212,8 @@
     <Content Include="Resources\Images\trend-sales-icon.png" />
     <Content Include="Resources\Images\withdraw.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Forms\Investments\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -4,16 +4,15 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace app_HogBank.Forms.AccountManagement
 {
-    public partial class AccountHistory : Form
+    public partial class TransactionApproval : Form
     {
-        public AccountHistory()
+        public TransactionApproval()
         {
             InitializeComponent();
         }
@@ -21,7 +20,7 @@ namespace app_HogBank.Forms.AccountManagement
         //=====================================================================
         // Window Management Snippets
         //=====================================================================
-        private void AccountHistory_Load(object sender, EventArgs e)
+        private void TransactionApproval_Load(object sender, EventArgs e)
         {
             this.panelHeader.MouseDown += new System.Windows.Forms.MouseEventHandler(this.mouseDown);
             foreach (Control control in this.panelHeader.Controls)

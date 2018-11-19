@@ -236,7 +236,7 @@
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(323, 36);
             this.textBoxUsername.TabIndex = 1;
-            this.textBoxUsername.Text = "username or email";
+            this.textBoxUsername.Text = "username";
             // 
             // panel3
             // 
@@ -281,7 +281,7 @@
             this.pictureBox5.TabIndex = 2;
             this.pictureBox5.TabStop = false;
             // 
-            // HomeScreenLoginForm
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -292,7 +292,7 @@
             this.Controls.Add(this.panelHeader);
             this.Controls.Add(this.pictureBox5);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "HomeScreenLoginForm";
+            this.Name = "LoginForm";
             this.Text = "Hog Bank - Login";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panelHeader.ResumeLayout(false);

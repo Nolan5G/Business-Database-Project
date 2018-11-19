@@ -1,4 +1,7 @@
-﻿using System;
+﻿using app_HogBank.Models;
+using app_HogBank.Models.Arguments;
+using app_HogBank.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +17,9 @@ namespace app_HogBank.Forms.AccountManagement
 {
     public partial class AccountHistory : Form
     {
+        DatabaseService databaseService;
+        DataTable dt;
+
         public AccountHistory()
         {
             InitializeComponent();
@@ -41,6 +48,12 @@ namespace app_HogBank.Forms.AccountManagement
             sidebarManager = new SidebarManager(this, this.GetType(), flowPanelA, flowPanelB, buttonToggle, buttonToggle2);
             this.buttonToggle.Click += new System.EventHandler(this.buttonToggle_Click);
             this.buttonToggle2.Click += new System.EventHandler(this.buttonToggle2_Click);
+
+            // Database Service Initialization
+            databaseService = new DatabaseService(onError, onInfo);
+
+            // Datatable Initialization
+            dt = new DataTable();
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -65,6 +78,68 @@ namespace app_HogBank.Forms.AccountManagement
         private void buttonToggle2_Click(object sender, EventArgs e)
         {
             sidebarManager.buttonToggle2Click();
+        }
+
+        //=====================================================================
+        // Database Service Event Handlers
+        //=====================================================================
+        private void onInfo(object sender, FormInfoArg arg)
+        {
+            MessageBox.Show(arg.message);
+        }
+
+        private void onError(object sender, FormErrorArg arg)
+        {
+            MessageBox.Show(arg.message);
+        }
+
+        //=====================================================================
+        // Custom Form Business Logic
+        //=====================================================================
+        private void buttonSubmit_Click(object sender, EventArgs e)
+        {
+            if (verifyTextboxes())
+            {
+                int account_number = Convert.ToInt32(textBoxAccountNumber.Text);
+
+                List<AccountTransactionVO> transactions = databaseService.GetAccountTransactionsForAccountID(account_number);
+
+                dt = new DataTable();
+                double totalAmount = 0;
+
+                dt.Columns.Add("Amount");
+                dt.Columns.Add("Status");
+                dt.Columns.Add("Date Created");
+                foreach(AccountTransactionVO item in transactions)
+                {
+                    var row = dt.NewRow();
+                    totalAmount += item.Amount;
+                    row["Amount"] = item.Amount;
+                    row["Status"] = item.Status;
+                    row["Date Created"] = item.Timestamp;
+
+                    dt.Rows.Add(row);
+                }
+                dataGridViewTransactions.DataSource = dt;
+
+                textBoxBalance.Text = totalAmount.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Transaction Info Provided: Account Number must be an integer.  Combobox must have length < 8.  Amount changed should be a decimal.");
+            }
+        }
+
+        private bool verifyTextboxes()
+        {
+            // Assume true until proven not true.
+            bool result = true;
+            if (textBoxAccountNumber.Text == null)
+                result = false;
+            else if (textBoxAccountNumber.Text == "" || !(new Regex(@"^\d+$").Match(textBoxAccountNumber.Text).Success))
+                result = false;
+
+            return result;
         }
     }
 }

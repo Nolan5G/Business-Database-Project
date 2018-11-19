@@ -40,12 +40,21 @@
             this.flowPanelB = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonToggle = new System.Windows.Forms.Button();
             this.flowPanelA = new System.Windows.Forms.FlowLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxAccountNumber = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dataGridViewTransactions = new System.Windows.Forms.DataGridView();
+            this.buttonSubmit = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxBalance = new System.Windows.Forms.TextBox();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonMaximize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonExit)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTransactions)).BeginInit();
             this.SuspendLayout();
             // 
             // panelHeader
@@ -172,11 +181,96 @@
             this.flowPanelA.TabIndex = 2;
             this.flowPanelA.Tag = "Collapsed";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(322, 118);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Account History";
+            // 
+            // textBoxAccountNumber
+            // 
+            this.textBoxAccountNumber.Location = new System.Drawing.Point(474, 143);
+            this.textBoxAccountNumber.Name = "textBoxAccountNumber";
+            this.textBoxAccountNumber.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAccountNumber.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(325, 150);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(143, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Enter Your Account Number:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(322, 184);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(111, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Account Transactions";
+            // 
+            // dataGridViewTransactions
+            // 
+            this.dataGridViewTransactions.AllowUserToAddRows = false;
+            this.dataGridViewTransactions.AllowUserToDeleteRows = false;
+            this.dataGridViewTransactions.AllowUserToResizeRows = false;
+            this.dataGridViewTransactions.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewTransactions.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridViewTransactions.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewTransactions.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dataGridViewTransactions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewTransactions.Location = new System.Drawing.Point(325, 249);
+            this.dataGridViewTransactions.Name = "dataGridViewTransactions";
+            this.dataGridViewTransactions.RowHeadersVisible = false;
+            this.dataGridViewTransactions.Size = new System.Drawing.Size(849, 461);
+            this.dataGridViewTransactions.TabIndex = 11;
+            // 
+            // buttonSubmit
+            // 
+            this.buttonSubmit.Location = new System.Drawing.Point(1098, 143);
+            this.buttonSubmit.Name = "buttonSubmit";
+            this.buttonSubmit.Size = new System.Drawing.Size(75, 23);
+            this.buttonSubmit.TabIndex = 12;
+            this.buttonSubmit.Text = "Submit";
+            this.buttonSubmit.UseVisualStyleBackColor = true;
+            this.buttonSubmit.Click += new System.EventHandler(this.buttonSubmit_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(325, 212);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(92, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Account Balance:";
+            // 
+            // textBoxBalance
+            // 
+            this.textBoxBalance.Location = new System.Drawing.Point(423, 209);
+            this.textBoxBalance.Name = "textBoxBalance";
+            this.textBoxBalance.ReadOnly = true;
+            this.textBoxBalance.Size = new System.Drawing.Size(151, 20);
+            this.textBoxBalance.TabIndex = 14;
+            // 
             // AccountHistory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 800);
+            this.Controls.Add(this.textBoxBalance);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.buttonSubmit);
+            this.Controls.Add(this.dataGridViewTransactions);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBoxAccountNumber);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -190,7 +284,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonExit)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTransactions)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -207,5 +303,13 @@
         private System.Windows.Forms.FlowLayoutPanel flowPanelB;
         private System.Windows.Forms.Button buttonToggle;
         private System.Windows.Forms.FlowLayoutPanel flowPanelA;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxAccountNumber;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridView dataGridViewTransactions;
+        private System.Windows.Forms.Button buttonSubmit;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxBalance;
     }
 }

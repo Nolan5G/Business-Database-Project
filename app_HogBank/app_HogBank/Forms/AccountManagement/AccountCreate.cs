@@ -47,9 +47,10 @@ namespace app_HogBank.Forms.AccountManagement
             this.buttonToggle.Click += new System.EventHandler(this.buttonToggle_Click);
             this.buttonToggle2.Click += new System.EventHandler(this.buttonToggle2_Click);
 
+            // Database Service Initialization
             databaseService = new DatabaseService(onError, onInfo);
 
-            // Update Welcome Message
+            // Set Stored Tag
             Type tagType = WindowManager.getTagType(this.Tag); ;
             if (tagType == null)
             {
@@ -93,6 +94,8 @@ namespace app_HogBank.Forms.AccountManagement
                 if(textBox1.Text.Length > 0 && textBox1.Text.Length <= 30 && comboBox1.Text.Length <= 8 && comboBox1.Text.Length > 0)
                 {
                     databaseService.AddNewAccount(storedObject.Id, textBox1.Text, comboBox1.Text);
+
+                    WindowManager.navigateToForm(this, this.GetType(), typeof(Homescreen));
                 }
             }   
             else

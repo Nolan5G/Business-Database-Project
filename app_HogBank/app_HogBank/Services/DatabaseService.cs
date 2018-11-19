@@ -41,6 +41,12 @@ namespace app_HogBank.Services
             connection.Close();
         }
 
+        // Single Use Utility Method that Might Come in Handy Back In Season 3 of Avatar - The Blue Airbender That Could.
+        private int getNullablePositiveIntFromDataReader(int index)
+        {
+            return (!dataReader.IsDBNull(index)) ? dataReader.GetInt32(index) : -1;
+        }
+
         //------------------------------------------------------------------------
         //  Event Handlers and Events
         //------------------------------------------------------------------------
@@ -149,9 +155,22 @@ namespace app_HogBank.Services
                 command = new OleDbCommand("INSERT INTO Accounts VALUES ('" + accountType + "','" + customerID + "','" + accountName + "')", connection);
                 int queryResult = command.ExecuteNonQuery();
 
+                command = new OleDbCommand("SELECT account_id FROM Accounts WHERE customer_id = '" + customerID + "' AND account_name = '" + accountName + "'", connection);
+                dataReader = command.ExecuteReader();
+
+                int new_account_id = -1;
+                while(dataReader.Read())
+                {
+                    new_account_id = dataReader.GetInt32(0);
+                }
+
                 if(OnFormInfo != null && GlobalVariables.DEBUG)
                 {
                     OnFormInfo(this, new FormInfoArg("Number of Rows Inserted: " + queryResult));
+                }
+                if (OnFormInfo != null)
+                {
+                    OnFormInfo(this, new FormInfoArg("Successfully created account!  You account number is " + new_account_id + ".  Please do not lose this number, as you will need it to access your account."));
                 }
             }
             catch (Exception e)
@@ -161,6 +180,56 @@ namespace app_HogBank.Services
                     OnFormError(this, new FormErrorArg("Error getting information from database: " + e.Message, e));
                 }
             }
+        }
+
+        public void AddAccountTransaction(int accountID, double amount)
+        {
+            try
+            {
+                command = new OleDbCommand("INSERT INTO Account_Transaction VALUES ('" + accountID + "', null,'" + amount + "', CURRENT_TIMESTAMP)", connection);
+                int queryResult = command.ExecuteNonQuery();
+
+                if (OnFormInfo != null && GlobalVariables.DEBUG)
+                {
+                    OnFormInfo(this, new FormInfoArg("Number of Rows Inserted: " + queryResult));
+                }
+                if (OnFormInfo != null)
+                {
+                    OnFormInfo(this, new FormInfoArg("Account #" + accountID + ": Successfully added $" + amount + " to your account."));
+                }
+            }
+            catch (Exception e)
+            {
+                if (OnFormError != null)
+                {
+                    OnFormError(this, new FormErrorArg("Error getting information from database: " + e.Message, e));
+                }
+            }
+        }
+
+        public List<AccountTransactionVO> GetAccountTransactionsForAccountID(int accountID)
+        {
+            List<AccountTransactionVO> results = new List<AccountTransactionVO>();
+            try
+            {
+                command = new OleDbCommand("SELECT line_id, teller_id, amount_transacted, created_timestamp FROM Account_Transaction WHERE account_id = '" + accountID + "'", connection);
+                dataReader = command.ExecuteReader();
+
+                int new_account_id = -1;
+                while (dataReader.Read())
+                {
+                    string status = (getNullablePositiveIntFromDataReader(1) != -1) ? "Approved" : "Pending";
+                    results.Add(new AccountTransactionVO((double)dataReader.GetDecimal(2), status, dataReader.GetDateTime(3).ToString()));
+                }
+            }
+            catch (Exception e)
+            {
+                if (OnFormError != null)
+                {
+                    OnFormError(this, new FormErrorArg("Error getting information from database: " + e.Message, e));
+                }
+            }
+            return results;
         }
     }
 }

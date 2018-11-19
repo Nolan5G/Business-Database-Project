@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="Forms\SidebarManager.cs" />
     <Compile Include="Forms\WindowManager.cs" />
+    <Compile Include="Models\AccountTransactionVO.cs" />
     <Compile Include="Models\Arguments\FormErrorArg.cs" />
     <Compile Include="Models\Arguments\FormInfoArg.cs" />
     <Compile Include="Models\CustomerVO.cs" />

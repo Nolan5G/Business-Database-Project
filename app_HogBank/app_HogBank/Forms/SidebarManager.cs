@@ -1,5 +1,7 @@
 ﻿using app_HogBank.Forms.AccountManagement;
 using app_HogBank.Forms.LoanManagement;
+using app_HogBank.Forms.ManagerScreens;
+using app_HogBank.Models;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,14 +14,15 @@ namespace app_HogBank.Forms
 {
     class SidebarManager
     {
-        public int fpa_height;
         private dynamic formReference;
         private FlowLayoutPanel flowPanelA;
         private FlowLayoutPanel flowPanelB;
         private Button buttonToggle;
         private Button buttonToggle2;
+        public int fpa_height;
+        private UserSessionFlags sessionFlags;
 
-        public SidebarManager(Form formContext, Type formType, FlowLayoutPanel flowPanelA, FlowLayoutPanel flowPanelB, Button buttonToggle, Button buttonToggle2)
+        public SidebarManager(Form formContext, Type formType, FlowLayoutPanel flowPanelA, FlowLayoutPanel flowPanelB, Button buttonToggle, Button buttonToggle2, UserSessionFlags sessionFlags)
         {
             this.formReference = Convert.ChangeType(formContext, formType);
 
@@ -32,6 +35,13 @@ namespace app_HogBank.Forms
                 fpa_height = flowPanelA.Size.Height;
             else
                 fpa_height = 300;
+
+            this.sessionFlags = sessionFlags;
+
+            if(!sessionFlags.isBranchManager)
+            {
+                this.buttonToggle2.Text = "Happy Banking";
+            } 
         }
 
         public void buttonToggleClick()
@@ -52,13 +62,41 @@ namespace app_HogBank.Forms
                 flowPanelA.Size = new Size(flowPanelA.Size.Width, fpa_height);
                 flowPanelA.Tag = "Expanded";
 
-                flowPanelA.Controls.Add(createNewButtonSpecific("Create Account", original_width, typeof(AccountCreate)));
-                flowPanelA.Controls.Add(createNewButtonSpecific("Account History", original_width, typeof(AccountHistory)));
-                flowPanelA.Controls.Add(createNewButtonSpecific("Deposits or Withdrawls", original_width, typeof(AccountTransaction)));
+                flowPanelA.Controls.Add(createNewLabel("Account Management", original_width));
+                if(!sessionFlags.isEmployee)
+                {
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Create Account", original_width, typeof(AccountCreate)));
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Account History", original_width, typeof(AccountHistory)));
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Deposits or Withdrawls", original_width, typeof(AccountTransaction)));
+                }
+                else if(sessionFlags.isTeller)
+                {
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Authorize Account Transactions", original_width, typeof(TransactionApproval)));
+                    flowPanelA.Controls.Add(createNewButtonSpecific("View Account History", original_width, typeof(AccountHistory)));
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Manual Deposit / Withdrawl", original_width, typeof(AccountTransaction)));
+                }
+                else
+                {
+                    flowPanelA.Controls.Add(createNewButtonSpecific("View Account History", original_width, typeof(AccountHistory)));
+                }
+
 
                 flowPanelA.Controls.Add(createNewLabel("Loan Management", original_width));
-                flowPanelA.Controls.Add(createNewButtonSpecific("Apply for Loan", original_width, typeof(LoanApplication)));
-                flowPanelA.Controls.Add(createNewButton("Loan History", original_width));
+                if(!sessionFlags.isEmployee)
+                {
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Apply for Loan", original_width, typeof(LoanApplication)));
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Loan History", original_width, typeof(LoanHistory)));
+                }
+                else if(sessionFlags.isBranchManager)
+                {
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Authorize Loan", original_width, typeof(LoanTransactionApproval)));
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Loan History", original_width, typeof(LoanHistory)));
+                }
+                else
+                {
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Loan History", original_width, typeof(LoanHistory)));
+                }
+                
 
                 flowPanelA.Controls.Add(createNewLabel("Investments", original_width));
                 flowPanelA.Controls.Add(createNewButton("Stocks", original_width));
@@ -83,10 +121,13 @@ namespace app_HogBank.Forms
             {
                 flowPanelB.Size = new Size(flowPanelB.Size.Width, fpa_height * 3 / 4);
                 flowPanelB.Tag = "Expanded";
-                flowPanelB.Controls.Add(createNewLabel("Manager Tools", original_width - 5));
-                flowPanelB.Controls.Add(createNewButton("Employee Management", original_width - 5));
-                flowPanelB.Controls.Add(createNewButton("Profit and Loss Report", original_width - 5));
-                flowPanelB.Controls.Add(createNewButton("Sales Trend Report", original_width - 5));
+                if(sessionFlags.isBranchManager)
+                {
+                    flowPanelB.Controls.Add(createNewLabel("Manager Tools", original_width - 5));
+                    flowPanelB.Controls.Add(createNewButtonSpecific("Employee Management", original_width - 5, typeof(EmployeeManagement)));
+                    flowPanelB.Controls.Add(createNewButtonSpecific("Profit and Loss Report", original_width - 5, typeof(ProfitAndLossReport)));
+                    flowPanelB.Controls.Add(createNewButtonSpecific("Sales Trend Report", original_width - 5, typeof(SalesTrendReport)));
+                }
             }
         }
 

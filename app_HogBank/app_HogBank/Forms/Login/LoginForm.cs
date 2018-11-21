@@ -54,6 +54,7 @@ namespace app_HogBank.Forms.Login
         private void buttonExit_Click(object sender, EventArgs e)
         {
             this.databaseService.cleanup();
+            Application.Exit();
             this.Close();
         }
 

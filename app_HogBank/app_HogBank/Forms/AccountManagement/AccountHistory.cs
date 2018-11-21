@@ -19,6 +19,9 @@ namespace app_HogBank.Forms.AccountManagement
     {
         DatabaseService databaseService;
         DataTable dt;
+        dynamic storedObject;
+        Type storedType;
+        UserSessionFlags sessionFlags;
 
         public AccountHistory()
         {
@@ -44,8 +47,24 @@ namespace app_HogBank.Forms.AccountManagement
             this.buttonMaximize.Click += new System.EventHandler(this.buttonMaximize_Click);
             this.buttonMinimize.Click += new System.EventHandler(this.buttonMinimize_Click);
 
+            // Set Stored Tag
+            Type tagType = WindowManager.getTagType(this.Tag); ;
+            if (tagType != null)
+            {
+                storedType = tagType;
+                storedObject = Convert.ChangeType(this.Tag, storedType);
+
+                // Determine if the user is a teller / branch manager.
+                sessionFlags = WindowManager.setUserSessionFlags(storedObject);
+            }
+            else
+            {
+                MessageBox.Show("System Error: Could not convert user information successfully");
+                throw new Exception("Type of Form.Tag object is null");
+            }
+
             // Sidebar Toggle
-            sidebarManager = new SidebarManager(this, this.GetType(), flowPanelA, flowPanelB, buttonToggle, buttonToggle2);
+            sidebarManager = new SidebarManager(this, this.GetType(), flowPanelA, flowPanelB, buttonToggle, buttonToggle2, sessionFlags);
             this.buttonToggle.Click += new System.EventHandler(this.buttonToggle_Click);
             this.buttonToggle2.Click += new System.EventHandler(this.buttonToggle2_Click);
 

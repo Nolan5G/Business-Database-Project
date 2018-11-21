@@ -84,6 +84,9 @@ namespace app_HogBank.Forms
             srcForm.Hide();
         }
 
+        //=======================================================
+        //  Utility Functions
+        //=======================================================
         public static Type getTagType(Object tag)
         {
             if(tag is CustomerVO)
@@ -97,6 +100,18 @@ namespace app_HogBank.Forms
             else
             {
                 return null;
+            }
+        }
+
+        public static UserSessionFlags setUserSessionFlags(dynamic storedValueObject)
+        {
+            if(storedValueObject is EmployeeVO)
+            {
+                return new UserSessionFlags(true, storedValueObject.IsTeller, storedValueObject.IsBranchManager);
+            }
+            else
+            {
+                return new UserSessionFlags(false, false, false);
             }
         }
     }

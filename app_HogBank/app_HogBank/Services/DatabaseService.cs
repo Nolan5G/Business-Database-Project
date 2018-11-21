@@ -262,7 +262,6 @@ namespace app_HogBank.Services
                 command = new OleDbCommand("SELECT line_id, teller_id, amount_transacted, created_timestamp FROM Account_Transaction WHERE account_id = '" + accountID + "'", connection);
                 dataReader = command.ExecuteReader();
 
-                int new_account_id = -1;
                 while (dataReader.Read())
                 {
                     string status = (getNullablePositiveIntFromDataReader(1) != -1) ? "Approved" : "Pending";

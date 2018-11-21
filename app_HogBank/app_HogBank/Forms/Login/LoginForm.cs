@@ -97,10 +97,27 @@ namespace app_HogBank.Forms.Login
                 {
                     LoginVO currentLogin = matchingLoginInfo[0];
                     CustomerVO customerInfo = databaseService.GetCustomerInformationFromRegistrationId(currentLogin.Id);
+                    if(customerInfo == null)
+                    {
+                        EmployeeVO employeeInfo = databaseService.GetEmployeeInformationFromRegistrationId(currentLogin.Id);
 
-                    // Before exiting, unsubscribe.
-                    this.databaseService.OnFormError -= this.formError;
-                    WindowManager.navigateToFormStartTag(this, this.GetType(), typeof(Homescreen), customerInfo);
+                        if(employeeInfo == null)
+                        {
+                            formInfo(this, new FormInfoArg("Credentials are currently inactive.  Please contact your local Hog Bank branch manager for more info"));
+                        } 
+                        else
+                        {
+                            // Before exiting, unsubscribe.
+                            this.databaseService.OnFormError -= this.formError;
+                            WindowManager.navigateToFormStartTag(this, this.GetType(), typeof(Homescreen), employeeInfo);
+                        }
+                    }
+                    else
+                    {
+                        // Before exiting, unsubscribe.
+                        this.databaseService.OnFormError -= this.formError;
+                        WindowManager.navigateToFormStartTag(this, this.GetType(), typeof(Homescreen), customerInfo);
+                    }
                 }
                 
             }

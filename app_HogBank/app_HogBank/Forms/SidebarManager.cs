@@ -1,4 +1,5 @@
 ﻿using app_HogBank.Forms.AccountManagement;
+using app_HogBank.Forms.LoanManagement;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -56,7 +57,7 @@ namespace app_HogBank.Forms
                 flowPanelA.Controls.Add(createNewButtonSpecific("Deposits or Withdrawls", original_width, typeof(AccountTransaction)));
 
                 flowPanelA.Controls.Add(createNewLabel("Loan Management", original_width));
-                flowPanelA.Controls.Add(createNewButton("Apply for Loan", original_width));
+                flowPanelA.Controls.Add(createNewButtonSpecific("Apply for Loan", original_width, typeof(LoanApplication)));
                 flowPanelA.Controls.Add(createNewButton("Loan History", original_width));
 
                 flowPanelA.Controls.Add(createNewLabel("Investments", original_width));

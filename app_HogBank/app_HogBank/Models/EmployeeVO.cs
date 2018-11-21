@@ -21,7 +21,7 @@ namespace app_HogBank.Models
         private bool isBranchManager;
         private bool isTeller;
 
-        public EmployeeVO(int id, int registrationId, string firstName, string lastName, string address, string status, string type, int hourlyRate, string joinDate, int buildingNumber)
+        public EmployeeVO(int id, int registrationId, string firstName, string lastName, string address, string status, string type, int hourlyRate, string joinDate, int buildingNumber, bool isTeller, bool isBranchManager)
         {
             this.Id = id;
             this.RegistrationId = registrationId;
@@ -33,8 +33,8 @@ namespace app_HogBank.Models
             this.HourlyRate = hourlyRate;
             this.JoinDate = joinDate;
             this.BuildingNumber = buildingNumber;
-            this.IsBranchManager = false;
-            this.IsTeller = false;
+            this.IsBranchManager = isBranchManager;
+            this.IsTeller = isTeller;
         }
 
         public int Id { get => id; set => id = value; }

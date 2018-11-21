@@ -148,6 +148,53 @@ namespace app_HogBank.Services
                 return null;
         }
 
+        public EmployeeVO GetEmployeeInformationFromRegistrationId(int id)
+        {
+            List<EmployeeVO> results = new List<EmployeeVO>();
+            try
+            {
+                command = new OleDbCommand("SELECT E.employee_id, E.registration_id, E.first_name, E.last_name, E.address, E.status, E.type, E.hourly_rate, E.hire_date, E.building_number, T.teller_id, B.branch_manager_id FROM Employee E LEFT JOIN Teller T ON E.employee_id = T.employee_id LEFT JOIN Branch_Manager B ON E.employee_id = B.employee_id WHERE registration_id = '" + id + "'", connection);
+                dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    // Note: I'm not adding the registration_id to the VO b/c it would link Customer Information to their login information in the app code.
+                    int temp = getNullablePositiveIntFromDataReader(10);
+                    bool isTeller = (temp != -1) ? true : false;
+                    temp = getNullablePositiveIntFromDataReader(11);
+                    bool isBranchManager = (temp != -1) ? true : false;
+                    results.Add(new EmployeeVO(dataReader.GetInt32(0), dataReader.GetInt32(1), dataReader.GetString(2), dataReader.GetString(3), dataReader.GetString(4), dataReader.GetString(5), dataReader.GetString(6), dataReader.GetInt32(7), dataReader.GetDateTime(8).ToString(), dataReader.GetInt32(9), isTeller, isBranchManager));
+                }
+
+                if (results.Count > 1)
+                {
+                    // Referential Integrity violation.  Application side constraint that we can't have multiple records refer to the same RegistrationID.
+                    results.Clear();
+                    results = null;
+                    throw new Exception("System Error - Referential Integrity Violation");
+                }
+                else if (results.Count < 1)
+                {
+                    // Forces the LoginForm to try something else... say check the Employee table or something.  And then check if that employee is a manager or something.
+                    results.Clear();
+                    results = null;
+                }
+            }
+            catch (Exception e)
+            {
+                if (OnFormError != null)
+                {
+                    OnFormError(this, new FormErrorArg("Error getting information from database: " + e.Message, e));
+                }
+                results = null;
+            }
+
+            if (results != null)
+                return results[0];
+            else
+                return null;
+        }
+
         public void AddNewAccount(int customerID, string accountName, string accountType)
         {
             try

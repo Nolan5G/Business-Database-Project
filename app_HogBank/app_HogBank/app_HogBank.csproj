@@ -137,7 +137,10 @@
     <Compile Include="Models\Arguments\FormInfoArg.cs" />
     <Compile Include="Models\CustomerVO.cs" />
     <Compile Include="Models\EmployeeVO.cs" />
+    <Compile Include="Models\LoanApplicationVO.cs" />
+    <Compile Include="Models\LoanPaymentVO.cs" />
     <Compile Include="Models\LoginVO.cs" />
+    <Compile Include="Models\UserSessionFlags.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\Login\SignupResponseForm.cs">
@@ -158,6 +161,21 @@
     <EmbeddedResource Include="Forms\AccountManagement\AccountTransaction.resx">
       <DependentUpon>AccountTransaction.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AccountManagement\TransactionApproval.resx">
+      <DependentUpon>TransactionApproval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoanManagement\LoanApplication.resx">
+      <DependentUpon>LoanApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoanManagement\LoanApplicationTransaction.resx">
+      <DependentUpon>LoanApplicationTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoanManagement\LoanHistory.resx">
+      <DependentUpon>LoanHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoanManagement\LoanTransactionApproval.resx">
+      <DependentUpon>LoanTransactionApproval.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainScreen\Homescreen.resx">
       <DependentUpon>Homescreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -169,6 +187,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Login\SignupResponseForm.resx">
       <DependentUpon>SignupResponseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ManagerScreens\EmployeeManagement.resx">
+      <DependentUpon>EmployeeManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ManagerScreens\ProfitAndLossReport.resx">
+      <DependentUpon>ProfitAndLossReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ManagerScreens\SalesTrendReport.resx">
+      <DependentUpon>SalesTrendReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

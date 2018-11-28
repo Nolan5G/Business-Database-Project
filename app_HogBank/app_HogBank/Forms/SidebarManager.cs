@@ -85,6 +85,7 @@ namespace app_HogBank.Forms
                 if(!sessionFlags.isEmployee)
                 {
                     flowPanelA.Controls.Add(createNewButtonSpecific("Apply for Loan", original_width, typeof(LoanApplication)));
+                    flowPanelA.Controls.Add(createNewButtonSpecific("Make a Payment", original_width, typeof(LoanApplicationTransaction)));
                     flowPanelA.Controls.Add(createNewButtonSpecific("Loan History", original_width, typeof(LoanHistory)));
                 }
                 else if(sessionFlags.isBranchManager)

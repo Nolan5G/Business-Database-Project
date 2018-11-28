@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -104,6 +105,36 @@ namespace app_HogBank.Forms.LoanManagement
         private void onError(object sender, FormErrorArg arg)
         {
             MessageBox.Show(arg.message);
+        }
+
+        private void buttonSubmit_Click(object sender, EventArgs e)
+        {
+            if (textBoxAccountNumber.Text != null && comboBoxLoanType.Text != null && textBoxInterest.Text != null && textBoxPrincipal.Text != null && textBoxSocialSecurity.Text != null && textBoxCreditScore.Text != null)
+            {
+                decimal dec_out, dec_out_2;
+                if ((new Regex(@"^\d+$").Match(textBoxAccountNumber.Text).Success) && Decimal.TryParse(textBoxInterest.Text, out dec_out) && Decimal.TryParse(textBoxPrincipal.Text, out dec_out_2) && (new Regex(@"^\d+$").Match(textBoxSocialSecurity.Text).Success) && (new Regex(@"^\d+$").Match(textBoxCreditScore.Text).Success))
+                {
+                    databaseService.AddLoanApplication(new LoanApplicationVO(-1, Convert.ToInt32(textBoxAccountNumber.Text), -1, Convert.ToDouble(textBoxPrincipal.Text), comboBoxLoanType.Text, Convert.ToInt32(textBoxInterest.Text), textBoxSocialSecurity.Text, Convert.ToInt32(textBoxCreditScore.Text), null));
+
+                    WindowManager.navigateToForm(this, this.GetType(), typeof(Homescreen));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid Loan Info Provided.");
+            }
+        }
+
+        private void comboBoxLoanType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(comboBoxLoanType.SelectedItem.ToString() == "Standard")
+            {
+                textBoxInterest.Text = "5";
+            }
+            if(comboBoxLoanType.SelectedItem.ToString() == "Premium")
+            {
+                textBoxInterest.Text = "2";
+            }
         }
     }
 }

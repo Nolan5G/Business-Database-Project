@@ -40,6 +40,12 @@
             this.flowPanelB = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonToggle = new System.Windows.Forms.Button();
             this.flowPanelA = new System.Windows.Forms.FlowLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxLoanId = new System.Windows.Forms.TextBox();
+            this.textBoxAmount = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.buttonSubmit = new System.Windows.Forms.Button();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonMinimize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.buttonMaximize)).BeginInit();
@@ -172,11 +178,69 @@
             this.flowPanelA.TabIndex = 2;
             this.flowPanelA.Tag = "Collapsed";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(319, 118);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Loan Payment";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(353, 151);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(204, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Enter the Loan ID this payment applies to:";
+            // 
+            // textBoxLoanId
+            // 
+            this.textBoxLoanId.Location = new System.Drawing.Point(575, 143);
+            this.textBoxLoanId.Name = "textBoxLoanId";
+            this.textBoxLoanId.Size = new System.Drawing.Size(100, 20);
+            this.textBoxLoanId.TabIndex = 8;
+            // 
+            // textBoxAmount
+            // 
+            this.textBoxAmount.Location = new System.Drawing.Point(575, 185);
+            this.textBoxAmount.Name = "textBoxAmount";
+            this.textBoxAmount.Size = new System.Drawing.Size(100, 20);
+            this.textBoxAmount.TabIndex = 9;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(353, 188);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(70, 13);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Amount Paid:";
+            // 
+            // buttonSubmit
+            // 
+            this.buttonSubmit.Location = new System.Drawing.Point(356, 235);
+            this.buttonSubmit.Name = "buttonSubmit";
+            this.buttonSubmit.Size = new System.Drawing.Size(75, 23);
+            this.buttonSubmit.TabIndex = 11;
+            this.buttonSubmit.Text = "Submit";
+            this.buttonSubmit.UseVisualStyleBackColor = true;
+            this.buttonSubmit.Click += new System.EventHandler(this.buttonSubmit_Click);
+            // 
             // LoanApplicationTransaction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 800);
+            this.Controls.Add(this.buttonSubmit);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBoxAmount);
+            this.Controls.Add(this.textBoxLoanId);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -191,6 +255,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonExit)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -207,5 +272,11 @@
         private System.Windows.Forms.FlowLayoutPanel flowPanelB;
         private System.Windows.Forms.Button buttonToggle;
         private System.Windows.Forms.FlowLayoutPanel flowPanelA;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxLoanId;
+        private System.Windows.Forms.TextBox textBoxAmount;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button buttonSubmit;
     }
 }

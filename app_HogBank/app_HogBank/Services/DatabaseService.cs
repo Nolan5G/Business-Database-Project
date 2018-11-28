@@ -277,5 +277,126 @@ namespace app_HogBank.Services
             }
             return results;
         }
+
+        public void AddLoanApplication(LoanApplicationVO valueObject)
+        {
+            try
+            {
+                command = new OleDbCommand("INSERT INTO Loan VALUES ('" + valueObject.AccountId + "', null,'" + valueObject.PrincipalAmount + "','" + valueObject.LoanType + "','" + valueObject.Interest + "','" + valueObject.SocialSecurity + "','" + valueObject.CreditScore + "', CURRENT_TIMESTAMP)", connection);
+                int queryResult = command.ExecuteNonQuery();
+
+                if (OnFormInfo != null && GlobalVariables.DEBUG)
+                {
+                    OnFormInfo(this, new FormInfoArg("Number of Rows Inserted: " + queryResult));
+                }
+                if (OnFormInfo != null)
+                {
+                    OnFormInfo(this, new FormInfoArg("Loan application successfully created"));
+                }
+            }
+            catch (Exception e)
+            {
+                if (OnFormError != null)
+                {
+                    OnFormError(this, new FormErrorArg("Error getting information from database: " + e.Message, e));
+                }
+            }
+        }
+
+        public void UpdateLoan(int branchManagerId, int loanId)
+        {
+            try
+            {
+                command = new OleDbCommand("UPDATE Loan SET branch_manager_id = '" + branchManagerId + "' WHERE load_id = '" + loanId + "'", connection);
+                int queryResult = command.ExecuteNonQuery();
+
+                if (OnFormInfo != null && GlobalVariables.DEBUG)
+                {
+                    OnFormInfo(this, new FormInfoArg("Number of Rows Updated: " + queryResult));
+                }
+                if (OnFormInfo != null)
+                {
+                    OnFormInfo(this, new FormInfoArg("Loan successfully updated"));
+                }
+            }
+            catch (Exception e)
+            {
+                if (OnFormError != null)
+                {
+                    OnFormError(this, new FormErrorArg("Error getting information from database: " + e.Message, e));
+                }
+            }
+        }
+
+        public void AddLoanTransaction(LoanPaymentVO valueObject)
+        {
+            try
+            {
+                command = new OleDbCommand("INSERT INTO Loan_Payment VALUES ('" + valueObject.Loan_id + "','" + valueObject.Payment_amount + "', CURRENT_TIMESTAMP)", connection);
+                int queryResult = command.ExecuteNonQuery();
+
+                if (OnFormInfo != null && GlobalVariables.DEBUG)
+                {
+                    OnFormInfo(this, new FormInfoArg("Number of Rows Inserted: " + queryResult));
+                }
+                if (OnFormInfo != null)
+                {
+                    OnFormInfo(this, new FormInfoArg("Payment successfully registered"));
+                }
+            }
+            catch (Exception e)
+            {
+                if (OnFormError != null)
+                {
+                    OnFormError(this, new FormErrorArg("Error getting information from database: " + e.Message, e));
+                }
+            }
+        }
+
+        public List<LoanApplicationVO> GetLoanInformation(int accountId)
+        {
+            List<LoanApplicationVO> results = new List<LoanApplicationVO>();
+            try
+            {
+                command = new OleDbCommand("SELECT loan_id, account_id, branch_manager_id, principal, loan_type, interest, social_security, credit_score, created_date FROM Loan WHERE account_id = '" + accountId + "'", connection);
+                dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    results.Add(new LoanApplicationVO(dataReader.GetInt32(0), dataReader.GetInt32(1), getNullablePositiveIntFromDataReader(2), (double)dataReader.GetDecimal(3), dataReader.GetString(4), (double)dataReader.GetDecimal(5), dataReader.GetString(6), Convert.ToInt32(dataReader.GetString(7)), dataReader.GetDateTime(8).ToString()));
+                }
+            }
+            catch (Exception e)
+            {
+                if (OnFormError != null)
+                {
+                    OnFormError(this, new FormErrorArg("Error getting information from database: " + e.Message, e));
+                }
+            }
+            return results;
+        }
+
+        public List<LoanPaymentVO> GetLoanPayments(int loanId)
+        {
+            List<LoanPaymentVO> results = new List<LoanPaymentVO>();
+            try
+            {
+                command = new OleDbCommand("SELECT loan_id, payment_amount FROM Loan_Payment WHERE loan_id = '" + loanId + "'", connection);
+                dataReader = command.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    results.Add(new LoanPaymentVO(-1, dataReader.GetInt32(0), (double)dataReader.GetDecimal(1)));
+                }
+            }
+            catch (Exception e)
+            {
+                if (OnFormError != null)
+                {
+                    OnFormError(this, new FormErrorArg("Error getting information from database: " + e.Message, e));
+                }
+            }
+            return results;
+        }
     }
 }

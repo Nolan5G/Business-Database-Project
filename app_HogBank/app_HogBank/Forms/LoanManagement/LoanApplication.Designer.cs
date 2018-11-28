@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoanApplication));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.buttonMinimize = new System.Windows.Forms.PictureBox();
             this.buttonMaximize = new System.Windows.Forms.PictureBox();
@@ -78,6 +79,7 @@
             // buttonMinimize
             // 
             this.buttonMinimize.BackColor = System.Drawing.Color.Transparent;
+            this.buttonMinimize.Image = ((System.Drawing.Image)(resources.GetObject("buttonMinimize.Image")));
             this.buttonMinimize.Location = new System.Drawing.Point(1082, 15);
             this.buttonMinimize.Name = "buttonMinimize";
             this.buttonMinimize.Size = new System.Drawing.Size(32, 29);
@@ -88,6 +90,7 @@
             // buttonMaximize
             // 
             this.buttonMaximize.BackColor = System.Drawing.Color.Transparent;
+            this.buttonMaximize.Image = ((System.Drawing.Image)(resources.GetObject("buttonMaximize.Image")));
             this.buttonMaximize.Location = new System.Drawing.Point(1120, 15);
             this.buttonMaximize.Name = "buttonMaximize";
             this.buttonMaximize.Size = new System.Drawing.Size(32, 29);
@@ -97,6 +100,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(646, 15);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(66, 72);
@@ -107,6 +111,7 @@
             // buttonExit
             // 
             this.buttonExit.BackColor = System.Drawing.Color.Transparent;
+            this.buttonExit.Image = ((System.Drawing.Image)(resources.GetObject("buttonExit.Image")));
             this.buttonExit.Location = new System.Drawing.Point(1158, 15);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(32, 29);
@@ -187,6 +192,7 @@
             this.buttonSubmit.TabIndex = 6;
             this.buttonSubmit.Text = "Submit";
             this.buttonSubmit.UseVisualStyleBackColor = true;
+            this.buttonSubmit.Click += new System.EventHandler(this.buttonSubmit_Click);
             // 
             // label2
             // 
@@ -217,10 +223,14 @@
             // comboBoxLoanType
             // 
             this.comboBoxLoanType.FormattingEnabled = true;
+            this.comboBoxLoanType.Items.AddRange(new object[] {
+            "Standard",
+            "Premium"});
             this.comboBoxLoanType.Location = new System.Drawing.Point(679, 190);
             this.comboBoxLoanType.Name = "comboBoxLoanType";
             this.comboBoxLoanType.Size = new System.Drawing.Size(121, 21);
             this.comboBoxLoanType.TabIndex = 10;
+            this.comboBoxLoanType.SelectedIndexChanged += new System.EventHandler(this.comboBoxLoanType_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -309,7 +319,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1200, 800);
+            this.ClientSize = new System.Drawing.Size(1200, 669);
             this.Controls.Add(this.textBoxCreditScore);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.textBoxSocialSecurity);

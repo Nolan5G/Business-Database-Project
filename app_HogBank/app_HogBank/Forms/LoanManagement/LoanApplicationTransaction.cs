@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -104,6 +105,24 @@ namespace app_HogBank.Forms.LoanManagement
         private void onError(object sender, FormErrorArg arg)
         {
             MessageBox.Show(arg.message);
+        }
+
+        private void buttonSubmit_Click(object sender, EventArgs e)
+        {
+            if (textBoxLoanId.Text != null && textBoxAmount.Text != null)
+            {
+                decimal decimalAmount;
+                if ((new Regex(@"^\d+$").Match(textBoxLoanId.Text).Success) && decimal.TryParse(textBoxAmount.Text, out decimalAmount))
+                {
+                    databaseService.AddLoanTransaction(new LoanPaymentVO(-1, Convert.ToInt32(textBoxLoanId.Text), Convert.ToDouble(textBoxAmount.Text)));
+
+                    WindowManager.navigateToForm(this, this.GetType(), typeof(Homescreen));
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid Loan Id or Amount.  Please try again.");
+            }
         }
     }
 }
